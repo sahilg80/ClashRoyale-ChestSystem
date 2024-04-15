@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace Assets.Scripts.UI.Player
 {
@@ -13,8 +9,8 @@ namespace Assets.Scripts.UI.Player
         private int currentGemsOwned;
         public int CurrentGemsOwned => currentGemsOwned;
 
-        public void UpdateCoinsOwned(int value) => currentCoinsOwned -= value;
-        public void UpdateGemsOwned(int value) => currentGemsOwned -= value;
+        //public void UpdateCoinsOwned(int value) => currentCoinsOwned -= value;
+        //public void UpdateGemsOwned(int value) => currentGemsOwned -= value;
         public void SetCoinsOwned(int value) => currentCoinsOwned = value;
         public void SetGemsOwned(int value) => currentGemsOwned = value;
     }

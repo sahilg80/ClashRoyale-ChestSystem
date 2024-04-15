@@ -17,4 +17,4 @@ MonoBehaviour:
   MinCoinsRewardCount: 100
   MaxGemsRewardCount: 30
   MinGemsRewardCount: 10
-  Timer: 2
+  Timer: 11

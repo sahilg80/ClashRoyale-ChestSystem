@@ -1,10 +1,4 @@
 ﻿using Assets.Scripts.Interfaces.Controller;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
 
 namespace Assets.Scripts.UI.GamePlayPanel
 {
@@ -26,7 +20,7 @@ namespace Assets.Scripts.UI.GamePlayPanel
 
         public void OnClickCollectChestButton()
         {
-            GameService.Instance.EventService.OnClickCollectChestButton.InvokeEvent();
+            GameService.Instance.EventService.OnClickAddChestButton.InvokeEvent();
         } 
     }
 }

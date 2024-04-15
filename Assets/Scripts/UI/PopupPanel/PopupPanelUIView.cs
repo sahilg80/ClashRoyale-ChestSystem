@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using Assets.Scripts.Interfaces.Views;
 
 namespace Assets.Scripts.UI.PopupPanel
@@ -25,23 +23,33 @@ namespace Assets.Scripts.UI.PopupPanel
 
         public void SubscribeEvents()
         {
-            //startTimerButton.onClick.AddListener();
-            //buyWithGemButton.onClick.AddListener();
+            startTimerButton.onClick.AddListener(OnClickStartTimerButton);
+            buyWithGemButton.onClick.AddListener(OnClickBuyWithGemsButton);
             closePanelButton.onClick.AddListener(DisablePanel);
         }
 
         public void UnSubscribeEvents()
         {
-            //startTimerButton.onClick.RemoveListener();
-            //buyWithGemButton.onClick.RemoveListener();
+            startTimerButton.onClick.RemoveListener(OnClickStartTimerButton);
+            buyWithGemButton.onClick.RemoveListener(OnClickBuyWithGemsButton);
             closePanelButton.onClick.RemoveListener(DisablePanel);
         }
 
-        private void DisablePanel() => SetPanelVisibility(false);
-
         public void SetPanelVisibility(bool value) => this.gameObject.SetActive(value);
-        
+
+        public void ToggleTimerButtonState(bool value) => startTimerButton.gameObject.SetActive(value);
+
         public void SetController(PopupPanelUIController controller) => this.popupController = controller;
+
+        private void DisablePanel()
+        {
+            popupController.OnPanelDisable();
+            SetPanelVisibility(false);
+        }
+
+        private void OnClickStartTimerButton() => popupController.OnClickStartTimer();
+
+        private void OnClickBuyWithGemsButton() => popupController.OnClickBuyButton();
 
         private void OnDisable()
         {

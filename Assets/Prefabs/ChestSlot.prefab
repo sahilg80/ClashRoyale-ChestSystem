@@ -438,10 +438,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   treasureChestHolder: {fileID: 5870346250829180035}
   statusText: {fileID: 5870346251987821172}
-  timerText: {fileID: 5870346250663589076}
   chestClickButton: {fileID: 1835323646}
   gemsRequiredToUnlock: {fileID: 5870346252612265973}
   animatorTreasureChest: {fileID: 5870346251179184768}
+  requiredGemsCountHolder: {fileID: 5870346250768456124}
+  treasureChestUIIcon: {fileID: 2105056002}
 --- !u!1 &5870346250962413425
 GameObject:
   m_ObjectHideFlags: 0
@@ -530,6 +531,7 @@ GameObject:
   - component: {fileID: 5870346251179184769}
   - component: {fileID: 5870346251179184770}
   - component: {fileID: 5870346251179184768}
+  - component: {fileID: 2105056002}
   m_Layer: 5
   m_Name: TreasureChestImage
   m_TagString: Untagged
@@ -615,6 +617,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2105056002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5870346251179184828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03e7d682f3e76e244a1ef67c7d28cf56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5870346251987821174
 GameObject:
   m_ObjectHideFlags: 0
