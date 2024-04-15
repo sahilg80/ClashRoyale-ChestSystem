@@ -1,9 +1,6 @@
 using Assets.Scripts.Event;
 using Assets.Scripts.UI;
-using Assets.Scripts.UI.TreasureChest;
 using Assets.Scripts.Utilities;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameService : GenericMonoSingleton<GameService>

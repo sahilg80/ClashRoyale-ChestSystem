@@ -3,7 +3,7 @@ using Assets.Scripts.UI.NotificationPanel;
 using Assets.Scripts.UI.Player;
 using Assets.Scripts.UI.PopupPanel;
 using Assets.Scripts.UI.TreasureChest;
-using System;
+using Assets.Scripts.UI.TreasureChest.UIPanel;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,7 +18,7 @@ namespace Assets.Scripts.UI
         private Transform chestSlotHolderParent;
         [SerializeField]
         private List<TreasureChestScriptableObject> treasureChestTypeList;
-        private TreasureChestService treasureChestService;
+        private TreasureChestPanelUIController treasureChestPanelUIController;
 
         [Header("GamePlayPanel")]
         [SerializeField]
@@ -44,12 +44,12 @@ namespace Assets.Scripts.UI
 
         private void OnDisable()
         {
-            treasureChestService.UnSubscribeEvents();
+            treasureChestPanelUIController.UnSubscribeEvents();
         }
 
         public void Initialize()
         {
-            treasureChestService = new TreasureChestService(treasureChestView, chestSlotHolderParent, 
+            treasureChestPanelUIController = new TreasureChestPanelUIController(treasureChestView, chestSlotHolderParent, 
                 playerSO.ChestSlotsCount, treasureChestTypeList);
             gamePlayPanelController = new GamePlayPanelController(gamePlayPanelView);
             playerUIController = new PlayerUIController(playerSO, playerUIView);
@@ -57,7 +57,7 @@ namespace Assets.Scripts.UI
             notificationPanelUIController = new NotificationPanelUIController(notificationPanelUIView);
         }
 
-        public NotificationPanelUIController GetNotificationPanelUIController() => notificationPanelUIController;
+        public PlayerUIController GetPlayerUIController() => playerUIController;
 
         public PopupPanelUIController GetPopupPanelUIController() => popupPanelUIController;
 
