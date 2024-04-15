@@ -8,10 +8,6 @@ using UnityEngine;
 
 public class GameService : GenericMonoSingleton<GameService>
 {
-    [Header("TreasureChest")]
-    [SerializeField]
-    private TreasureChestView treasureChestView;
-    private TreasureChestService treasureChestService;
 
     [Header("UI Service")]
     [SerializeField] 
@@ -25,9 +21,13 @@ public class GameService : GenericMonoSingleton<GameService>
     protected override void Awake()
     {
         base.Awake();
-        treasureChestService = new TreasureChestService(treasureChestView);
-        eventService = new EventService();
+        Initialize();
     }
 
+    private void Initialize()
+    {
+        eventService = new EventService();
+        uiService.Initialize();
+    }
 
 }
