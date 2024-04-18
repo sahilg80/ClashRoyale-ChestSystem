@@ -6,6 +6,7 @@ namespace Assets.Scripts.UI.TreasureChest.States.ConcreteStates
     public class UnlockingState : TeasureChestBaseState
     {
         private float currentTimerValue;
+
         public UnlockingState(TreasureChestStateMachine treasureChestStateMachine, TreasureChestController treasureChestController)
         {
             Controller = treasureChestController;
@@ -14,7 +15,10 @@ namespace Assets.Scripts.UI.TreasureChest.States.ConcreteStates
 
         public override void OnEnter()
         {
-            currentTimerValue = Controller.ChestScriptableObject.Timer * Constants.SECONDS_VALUE; // Convert minutes to seconds
+            if (currentTimerValue == 0)
+            {
+                currentTimerValue = Controller.ChestScriptableObject.Timer * Constants.SECONDS_VALUE; // Convert minutes to seconds
+            }
             UpdateTimerUI();
         }
 

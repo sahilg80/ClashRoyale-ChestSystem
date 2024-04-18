@@ -13,6 +13,7 @@ namespace Assets.Scripts.UI.GamePlayPanel
         private Button undoButton;
         private GamePlayPanelController gamePlayPanelController;
         private event Action OnClickCollectChestButtonEvent;
+        private event Action OnClickUndoButton;
 
         private void OnEnable()
         {
@@ -25,8 +26,15 @@ namespace Assets.Scripts.UI.GamePlayPanel
             {
                 collectChestButton.onClick.AddListener(OnClickCollectChestButton);
                 OnClickCollectChestButtonEvent += gamePlayPanelController.OnClickCollectChestButton;
+
+                undoButton.onClick.AddListener(OnUndoButtonClicked);
+                OnClickUndoButton += gamePlayPanelController.OnClickUndoButton;
             }
         }
+
+        public void SetController(GamePlayPanelController controller) => gamePlayPanelController = controller;
+
+        public void ToggleUndoVisibility(bool value) => undoButton.gameObject.SetActive(value);
 
         private void UnSubscribeEvents()
         {
@@ -34,12 +42,15 @@ namespace Assets.Scripts.UI.GamePlayPanel
             {
                 collectChestButton.onClick.RemoveListener(OnClickCollectChestButton);
                 OnClickCollectChestButtonEvent -= gamePlayPanelController.OnClickCollectChestButton;
+
+                undoButton.onClick.RemoveListener(OnUndoButtonClicked);
+                OnClickUndoButton -= gamePlayPanelController.OnClickUndoButton;
             }
         }
 
-        private void OnClickCollectChestButton() => OnClickCollectChestButtonEvent?.Invoke();
+        private void OnUndoButtonClicked() => OnClickUndoButton?.Invoke();
 
-        public void SetController(GamePlayPanelController controller) => gamePlayPanelController = controller;
+        private void OnClickCollectChestButton() => OnClickCollectChestButtonEvent?.Invoke();
 
         private void OnDisable()
         {

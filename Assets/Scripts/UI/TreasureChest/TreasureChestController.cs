@@ -20,7 +20,7 @@ namespace Assets.Scripts.UI.TreasureChest
             TreasureChestPanelUIController treasureChestPanelUIController)
         {
             this.chestSlotHolderParent = chestSlotHolderParent;
-            this.treasureChestView = UnityEngine.Object.Instantiate(treasureChestView);
+            this.treasureChestView = Object.Instantiate(treasureChestView);
             this.treasureChestPanelUIController = treasureChestPanelUIController;
             Initialize();
         }
@@ -81,6 +81,12 @@ namespace Assets.Scripts.UI.TreasureChest
             treasureChestStateMachine.SwitchState(StateType.UNLOCKED);
         }
 
+        public void UndoBuyingDecision()
+        {
+            GameService.Instance.EventService.OnUndoBuyingTreasureChest.InvokeEvent(treasureChestModel.GemsRequiredToUnlock);
+            treasureChestStateMachine.SwitchToPreviousState();
+        }
+
         public void CollectTreasureChest() => treasureChestView.PlayTreasureOpenAnimation();
         
         private void OnAnimationDone()
@@ -111,10 +117,11 @@ namespace Assets.Scripts.UI.TreasureChest
                     GameService.Instance.EventService.PopPanelDisplay.InvokeEvent(false, this);
                     break;
                 case StateType.UNLOCKED:
+                    GameService.Instance.UIService.GetGamePlayPanelController().ResetUndo();
                     treasureChestStateMachine.SwitchState(StateType.COLLECTED);
                     break;
                 case StateType.COLLECTED:
-                    treasureChestStateMachine.SwitchState(StateType.DEACTIVATE);
+                    //treasureChestStateMachine.SwitchState(StateType.DEACTIVATE);
                     break;
                 default:
                     Debug.LogError("Invalid state");

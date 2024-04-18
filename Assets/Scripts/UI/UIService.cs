@@ -61,5 +61,6 @@ namespace Assets.Scripts.UI
 
         public PopupPanelUIController GetPopupPanelUIController() => popupPanelUIController;
 
+        public GamePlayPanelController GetGamePlayPanelController() => gamePlayPanelController;
     }
 }

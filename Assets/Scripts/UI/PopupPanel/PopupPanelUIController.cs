@@ -8,6 +8,7 @@ namespace Assets.Scripts.UI.PopupPanel
         private PopupPanelUIView popupPanelUIView;
         private TreasureChestController selectedTreasureChestController;
 
+
         public PopupPanelUIController(PopupPanelUIView popupPanelUIView)
         {
             this.popupPanelUIView = popupPanelUIView;
@@ -33,14 +34,6 @@ namespace Assets.Scripts.UI.PopupPanel
             selectedTreasureChestController = controller;
         }
 
-        //public void SetSelectedChestController(TreasureChestController controller) => selectedTreasureChestController = controller;
-
-        //public void PanelVisibilityWithTimerButtonON(bool value)
-        //{
-        //    SetPanelVisibility(true);
-        //    ToggleTimerButtonState(value);
-        //}
-
         public void OnClickStartTimer()
         {
             selectedTreasureChestController.TransitionToState(TreasureChest.States.StateType.UNLOCKING);
@@ -49,7 +42,7 @@ namespace Assets.Scripts.UI.PopupPanel
 
         public void OnClickBuyButton()
         {
-            selectedTreasureChestController.OnClickBuyWithGemsButton();
+            GameService.Instance.UIService.GetGamePlayPanelController().BuyTreasureChest(selectedTreasureChestController);
             SetPanelVisibility(false);
         }
 
