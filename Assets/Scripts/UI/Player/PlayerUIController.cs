@@ -23,11 +23,10 @@ namespace Assets.Scripts.UI.Player
 
         public void Initialize()
         {
-            playerUIModel.SetCoinsOwned(playerSO.InitialCoinsOwned);
-            playerUIModel.SetGemsOwned(playerSO.InitialGemsOwned);
+
+            SetPlayerCoins(playerSO.InitialCoinsOwned);
+            SetPlayerGems(playerSO.InitialGemsOwned);
             playerUIView.SetController(this);
-            playerUIView.SetRemainingCoins(playerUIModel.CurrentCoinsOwned.ToString());
-            playerUIView.SetRemainingGems(playerUIModel.CurrentGemsOwned.ToString());
             SubscribeEvents();
         }
 
@@ -35,29 +34,39 @@ namespace Assets.Scripts.UI.Player
         {
             GameService.Instance.EventService.OnBuyChest.AddListener(OnBuyingTreasureChest);
             GameService.Instance.EventService.OnCollectTreasureChest.AddListener(OnTreasureChestCollected);
+            GameService.Instance.EventService.OnUndoBuyingTreasureChest.AddListener(UpdatePlayersGemsToPrevious);
         }
 
         private void UnSubscribeEvents()
         {
             GameService.Instance.EventService.OnBuyChest.RemoveListener(OnBuyingTreasureChest);
             GameService.Instance.EventService.OnCollectTreasureChest.RemoveListener(OnTreasureChestCollected);
+            GameService.Instance.EventService.OnUndoBuyingTreasureChest.RemoveListener(UpdatePlayersGemsToPrevious);
         }
 
-        private void OnBuyingTreasureChest(int gemsUsed)
-        {
-            playerUIModel.SetGemsOwned(playerUIModel.CurrentGemsOwned - gemsUsed);
-            playerUIView.SetRemainingGems(playerUIModel.CurrentGemsOwned.ToString());
-        }
+        private void OnBuyingTreasureChest(int gemsUsed) => SetPlayerGems(-gemsUsed);
         
         private void OnTreasureChestCollected(int coins, int gems)
         {
+            SetPlayerGems(gems); 
+            SetPlayerCoins(coins);
+        }
+
+        private void SetPlayerGems(int gems)
+        {
             playerUIModel.SetGemsOwned(playerUIModel.CurrentGemsOwned + gems);
-            playerUIModel.SetCoinsOwned(playerUIModel.CurrentCoinsOwned + coins);
             playerUIView.SetRemainingGems(playerUIModel.CurrentGemsOwned.ToString());
+        }
+
+        private void SetPlayerCoins(int coins)
+        {
+            playerUIModel.SetCoinsOwned(playerUIModel.CurrentCoinsOwned + coins);
             playerUIView.SetRemainingCoins(playerUIModel.CurrentCoinsOwned.ToString());
         }
 
+        private void UpdatePlayersGemsToPrevious(int gems) => SetPlayerGems(gems);
+
         public int GetRemainingGemsCount() => playerUIModel.CurrentGemsOwned;
-        
+
     }
 }

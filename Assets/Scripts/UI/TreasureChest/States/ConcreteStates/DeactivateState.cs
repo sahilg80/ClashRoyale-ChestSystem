@@ -12,7 +12,6 @@ namespace Assets.Scripts.UI.TreasureChest.States.ConcreteStates
 
         public override void OnEnter()
         {
-            //play animation
             Controller.SetChestVisibility(false);
         }
 

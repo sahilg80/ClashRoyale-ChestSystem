@@ -14,7 +14,6 @@ public class GameService : GenericMonoSingleton<GameService>
     private EventService eventService;
     public EventService EventService => eventService;
 
-    // Start is called before the first frame update
     protected override void Awake()
     {
         base.Awake();

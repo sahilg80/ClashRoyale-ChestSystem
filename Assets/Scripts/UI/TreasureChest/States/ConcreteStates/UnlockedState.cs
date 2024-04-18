@@ -13,7 +13,6 @@ namespace Assets.Scripts.UI.TreasureChest.States.ConcreteStates
 
         public override void OnEnter()
         {
-            Debug.Log("unlocked chest");
             Controller.UpdateUIValues("Open", 0);
         }
 

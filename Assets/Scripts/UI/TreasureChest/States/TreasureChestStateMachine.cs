@@ -10,6 +10,7 @@ namespace Assets.Scripts.UI.TreasureChest.States
         private Dictionary<StateType, TeasureChestBaseState> states;
         private TeasureChestBaseState activeState;
         private StateType activeStateValue;
+        private StateType previousActiveState;
         public StateType ActiveStateValue => activeStateValue;
 
         public TreasureChestStateMachine(TreasureChestController treasureChestController)
@@ -25,29 +26,25 @@ namespace Assets.Scripts.UI.TreasureChest.States
 
         public void SwitchState(StateType newState)
         {
+            previousActiveState = activeStateValue;
             activeState?.OnExit();
 
             switch (newState)
             {
                 case StateType.LOCKED:
-                    Debug.Log("Switching to LOCKED state");
                     activeState = states.GetValueOrDefault(StateType.LOCKED);
 
                     break;
                 case StateType.UNLOCKING:
-                    Debug.Log("Switching to UNLOCKING state"); 
                     activeState = states.GetValueOrDefault(StateType.UNLOCKING);
                     break;
                 case StateType.UNLOCKED:
-                    Debug.Log("Switching to UNLOCKED state");
                     activeState = states.GetValueOrDefault(StateType.UNLOCKED);
                     break;
                 case StateType.COLLECTED:
-                    Debug.Log("Switching to COLLECTED state");
                     activeState = states.GetValueOrDefault(StateType.COLLECTED);
                     break;
                 case StateType.DEACTIVATE:
-                    Debug.Log("Switching to DEACTIVATE state");
                     activeState = states.GetValueOrDefault(StateType.DEACTIVATE);
                     break;
                 default:
@@ -59,6 +56,8 @@ namespace Assets.Scripts.UI.TreasureChest.States
             activeStateValue = newState;
             activeState.OnEnter();
         }
+
+        public void SwitchToPreviousState() => SwitchState(previousActiveState);
 
         private void Initialize()
         {
